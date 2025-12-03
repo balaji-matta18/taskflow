@@ -3,6 +3,8 @@
 <head>
     <title>TaskFlow – Tasks</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- added for correct mobile scaling -->
+
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icons for search icon -->
@@ -279,14 +281,135 @@
             max-width: 1200px;
         }
 
-        /* Mobile-first layout */
-        @media (max-width: 576px) {
-            .task-main-row {
-                gap: 22px;
+        /* --- MOBILE-ONLY ADJUSTMENTS (keeps desktop unchanged) --- */
+        @media (max-width: 768px) {
+
+            /* prevent any horizontal scroll on mobile */
+            html, body {
+                overflow-x: hidden;
             }
 
-            .task-field {
-                flex: 1;
+            /* container spacing for mobile */
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            /* stack main row vertically so fields don't overflow */
+            .task-main-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                margin-bottom: 16px;
+            }
+
+
+            /* ⭐ FIX FOR SEARCH ICON + TEXT OVERLAPPING ⭐ */
+            .search-wrapper .form-control {
+                padding-left: 48px !important;
+            }
+
+            .search-wrapper i {
+                left: 12px !important;
+            }
+
+
+            /* force fields to full width on mobile */
+            .task-field,
+            .task-field.title-field,
+            .task-field.priority-field,
+            .task-field.category-field,
+            .task-field.date-field,
+            .task-field.status-field,
+            .task-field.actions-field {
+                width: 100% !important;
+                min-width: 0 !important;
+                flex: none !important;
+            }
+
+            /* slightly larger tappable title */
+            .task-title {
+                font-size: 1.05rem;
+            }
+
+            .field-label {
+                font-size: 0.78rem;
+            }
+
+            /* badges slightly bigger and wrap if needed */
+            .badge {
+                padding: 6px 12px;
+                font-size: 0.86rem;
+            }
+
+            /* status smaller but fit */
+            .task-status {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+                display: inline-block;
+            }
+
+            /* Make filter inputs full-width and tall enough for touch */
+            form.row.g-2.mb-4 .form-control,
+            form.row.g-2.mb-4 .form-select {
+                height: 46px;
+                padding: 10px 14px;
+                font-size: 0.95rem;
+            }
+
+            /* Make filter button full-width on smaller widths */
+            .col-12.col-md-2.d-grid {
+                width: 100%;
+            }
+
+            .btn-outline-light.w-100, .btn-outline-light {
+                height: 46px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.95rem;
+                padding: 0 14px;
+            }
+
+            /* task-actions wrap nicely and buttons become easier to tap */
+            .task-actions {
+                flex-wrap: wrap;
+                gap: 10px;
+                overflow: visible;
+                padding-bottom: 0;
+            }
+
+            .task-actions .btn-sm {
+                flex: 0 0 30%;
+                min-width: 28%;
+                text-align: center;
+                padding: 8px 10px;
+                font-size: 0.92rem;
+            }
+
+            /* description spacing remains readable on mobile */
+            .task-description {
+                font-size: 0.95rem;
+                padding-top: 12px;
+                margin-top: 12px;
+            }
+
+            /* reduce visual weight of card on very small screens */
+            .task-card {
+                padding: 18px;
+                border-radius: 12px;
+            }
+        }
+
+        /* extra small screens - final polish */
+        @media (max-width: 420px) {
+            .task-actions .btn-sm {
+                flex: 0 0 48%;
+                min-width: 48%;
+            }
+
+            .btn-success {
+                padding: 10px 18px;
             }
         }
     </style>
